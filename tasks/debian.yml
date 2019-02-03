@@ -16,6 +16,10 @@
   apt:
     name: ['unzip', 'systemd']
     state: present
+  register: result
+  until: result is succeeded
+  retries: 5
+  delay: 5
 
 - name: Setting internal variables for convinience
   set_fact:
@@ -29,7 +33,7 @@
     mode: 0755
 
 - name: Move the binary executable file
-  copy: 
+  copy:
     src: /tmp/alertmanager-{{ alertmanager_version }}.linux-amd64/alertmanager
     dest: /usr/local/bin/
     mode: 0555
