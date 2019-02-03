@@ -1,0 +1,6 @@
+---
+- hosts: exporter
+  user: ubuntu
+  become: yes
+  roles:
+    - ansible-role-alertmanager
